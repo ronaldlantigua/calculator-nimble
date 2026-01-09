@@ -18,7 +18,7 @@
 				return result;
 			});
 
-			if (numbers.Count() <= 1 || numbers.Count() > 2) throw new Exception("Invalid Input");
+			if (numbers.Count() <= 1) throw new Exception("Invalid Input");
 			return numbers;
 		}
 	}

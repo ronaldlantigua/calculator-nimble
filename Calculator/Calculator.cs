@@ -3,14 +3,14 @@ namespace CalculatorApp
 {
 	public interface ICalculator
 	{
-		double Sum(double num1, double num2);
+		double Sum(IEnumerable<double> numbers);
 	}
 
 	public class Calculator : ICalculator
 	{
-		public double Sum(double num1, double num2)
+		public double Sum(IEnumerable<double> numbers)
 		{
-			return num1 + num2;
+			return numbers.Sum();
 		}
 	}
 }

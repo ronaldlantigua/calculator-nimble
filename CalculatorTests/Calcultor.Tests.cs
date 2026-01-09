@@ -11,12 +11,12 @@ namespace CalculatorTests
 		public void Sum_TwoPositiveNumbers_ReturnValidResult()
 		{
 			//Arrange
-			var number1 = 8; var number2 = 10;
+			var numbers = new List<double> {10, 8};
 			var expectedResult = 18;
 
 			//Action
 
-			var result = sut.Sum(number1, number2);
+			var result = sut.Sum(numbers);
 
 			//Asertions
 			Assert.Equal(expectedResult, result);
@@ -26,12 +26,13 @@ namespace CalculatorTests
 		public void Sum_OnePositiveNumberAndOneNegativeNumber_ReturnValidResult()
 		{
 			//Arrange
-			var number1 = -8; var number2 = 10;
+			var numbers = new List<double> { -8, 10 };
+
 			var expectedResult = 2;
 
 			//Action
 
-			var result = sut.Sum(number1, number2);
+			var result = sut.Sum(numbers);
 
 			//Asertions
 			Assert.Equal(expectedResult, result);
@@ -41,12 +42,13 @@ namespace CalculatorTests
 		public void Sum_TwoNegativeNumbers_ReturnValidResult()
 		{
 			//Arrange
-			var number1 = -8; var number2 = -10;
+			var numbers = new List<double> { -8, -10 };
+
 			var expectedResult = -18;
 
 			//Action
 
-			var result = sut.Sum(number1, number2);
+			var result = sut.Sum(numbers);
 
 			//Asertions
 			Assert.Equal(expectedResult, result);
