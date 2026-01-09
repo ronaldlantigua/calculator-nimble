@@ -26,6 +26,7 @@ namespace CalculatorTests
 		[InlineData(",5",0, 5)]
 		[InlineData("5,8", 5, 8)]
 		[InlineData("5,nget", 5, 0)]
+		[InlineData("20\n12", 20, 12)]
 
 		public void GetNumbersFromInput_GivenCorrectInput_ReturnValidNumbers(string input, double expectedNumber1, double expectedNumber2)
 		{

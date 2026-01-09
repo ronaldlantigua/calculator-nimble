@@ -4,8 +4,12 @@
 	{
 		public static IEnumerable<double> GetNumbersFromInput(string input)
 		{
-			var delimeter = ',';
-			var numbers = input.Split(delimeter).Select(x => {
+			var baseDelimeter = ",";
+			var extraDelimeter = "\n";
+
+			input = input.Replace(extraDelimeter, baseDelimeter.ToString());
+
+			var numbers = input.Split(baseDelimeter).Select(x => {
 				double result = 0;
 				try
 				{
