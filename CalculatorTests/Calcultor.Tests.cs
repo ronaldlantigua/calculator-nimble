@@ -5,7 +5,6 @@ namespace CalculatorTests
 {
 	public class CalcultorTests
 	{
-		private ICalculator sut = new Calculator();
 		
 		[Fact]
 		public void Sum_TwoPositiveNumbers_ReturnValidResult()
@@ -13,6 +12,8 @@ namespace CalculatorTests
 			//Arrange
 			var numbers = new List<double> {10, 8};
 			var expectedResult = 18;
+		    ICalculator sut = new Calculator();
+
 
 			//Action
 
@@ -27,8 +28,8 @@ namespace CalculatorTests
 		{
 			//Arrange
 			var numbers = new List<double> { -8, 10 };
-
 			var expectedResult = 2;
+			ICalculator sut = new Calculator();
 
 			//Action
 
@@ -43,8 +44,8 @@ namespace CalculatorTests
 		{
 			//Arrange
 			var numbers = new List<double> { -8, -10 };
-
 			var expectedResult = -18;
+			ICalculator sut = new Calculator();
 
 			//Action
 

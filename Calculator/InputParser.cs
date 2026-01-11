@@ -1,4 +1,6 @@
-﻿namespace CalculatorApp
+﻿using System.Linq;
+
+namespace CalculatorApp
 {
 	public static class InputParser
 	{
@@ -9,18 +11,20 @@
 
 			input = input.Replace(extraDelimeter, baseDelimeter.ToString());
 
-			var numbers = input.Split(baseDelimeter).Select(x => {
-				double result = 0;
+			var numbers = input.Split(baseDelimeter).Select(term => {
+				double number = 0;
 				try
 				{
-					double.TryParse(x, out result);
+					double.TryParse(term, out number);
 				}
 				catch (Exception)
 				{
 					return 0;
 				}
-				return result;
+
+				return number;
 			});
+
 
 			if (numbers.Count() <= 1) throw new Exception("Invalid Input");
 			return numbers;
