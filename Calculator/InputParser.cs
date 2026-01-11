@@ -43,7 +43,7 @@ namespace CalculatorApp
 
 		private static string GetCustomDelimeter(string input)
 		{
-			var customDelimeterPattern = "//.\n";
+			var customDelimeterPattern = "//.*\n";
 			var match = Regex.Match(input, customDelimeterPattern);
 			if (match.Success && match.Index == 0) 
 			{
