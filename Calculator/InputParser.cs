@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace CalculatorApp
 {
@@ -8,8 +9,14 @@ namespace CalculatorApp
 		{
 			var baseDelimeter = ",";
 			var extraDelimeter = "\n";
+			var customDelimeter = GetCustomDelimeter(input);
 
-			input = input.Replace(extraDelimeter, baseDelimeter.ToString());
+			input = input.Replace(extraDelimeter, baseDelimeter);
+
+			if(!string.IsNullOrEmpty(customDelimeter))
+			{
+				input = input.Replace(customDelimeter, baseDelimeter);
+			}
 
 			var numbers = input.Split(baseDelimeter).Select(term => {
 				double number = 0;
@@ -32,6 +39,17 @@ namespace CalculatorApp
 
 			
 			return numbers;
+		}
+
+		private static string GetCustomDelimeter(string input)
+		{
+			var customDelimeterPattern = "//.\n";
+			var match = Regex.Match(input, customDelimeterPattern);
+			if (match.Success && match.Index == 0) 
+			{
+				return match.Groups[0].Value.Replace("//", "").Replace("\n", "");
+			}
+			return string.Empty;
 		}
 	}
 }
