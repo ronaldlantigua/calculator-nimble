@@ -54,5 +54,22 @@ namespace CalculatorTests
 			//Assertion
 			Assert.True(expecteNumbers.All(result.Contains));
 		}
+		
+		[Fact]
+		public void GetNumbersFromInput_GiveNumbersGreaterThenOneThousand_ConvertThoseValuesToZero()
+		{
+			//Arrange
+			var input = "4, 1001, 5000, 2";
+			var expecteNumbers = new List<double>()
+			{
+				4,0,0,2
+			};
+
+			//Act
+			var result = InputParser.GetNumbersFromInput(input);
+
+			//Assertion
+			Assert.True(expecteNumbers.All(result.Contains));
+		}
 	}
 }

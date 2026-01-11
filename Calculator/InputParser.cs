@@ -22,11 +22,15 @@ namespace CalculatorApp
 					return 0;
 				}
 
+				if (number > 1000) return 0;
+
 				return number;
 			});
 
 
 			if (numbers.Count() <= 1) throw new Exception("Invalid Input");
+
+			
 			return numbers;
 		}
 	}
