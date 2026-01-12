@@ -88,5 +88,22 @@ namespace CalculatorTests
 			//Assertion
 			Assert.True(expecteNumbers.All(result.Contains));
 		}
+		
+		[Fact]
+		public void GetNumbersFromInput_GiveASingleCustomDelimterWithAnyLenght_ShouldAllowThatDelimeterToSeparteNumbers()
+		{
+			//Arrange
+			var input = "//[###]\n2###5";
+			var expecteNumbers = new List<double>()
+			{
+				2,5
+			};
+
+			//Act
+			var result = InputParser.GetNumbersFromInput(input);
+
+			//Assertion
+			Assert.True(expecteNumbers.All(result.Contains));
+		}
 	}
 }

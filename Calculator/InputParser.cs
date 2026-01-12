@@ -43,11 +43,18 @@ namespace CalculatorApp
 
 		private static string GetCustomDelimeter(string input)
 		{
-			var customDelimeterPattern = "//.\n";
+			var customSingleDelimeterPattern = "//.\n";
+			var customDelimeterPattern = "//\\[.+\\]\n";
+			var singleMatch = Regex.Match(input, customSingleDelimeterPattern);
 			var match = Regex.Match(input, customDelimeterPattern);
+			if (singleMatch.Success && singleMatch.Index == 0) 
+			{
+				return singleMatch.Groups[0].Value.Replace("//", "").Replace("\n", "");
+			}
+			
 			if (match.Success && match.Index == 0) 
 			{
-				return match.Groups[0].Value.Replace("//", "").Replace("\n", "");
+				return match.Groups[0].Value.Replace("//[", "").Replace("]\n", "");
 			}
 			return string.Empty;
 		}
