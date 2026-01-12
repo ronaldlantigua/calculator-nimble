@@ -105,5 +105,22 @@ namespace CalculatorTests
 			//Assertion
 			Assert.True(expecteNumbers.All(result.Contains));
 		}
+		
+		[Fact]
+		public void GetNumbersFromInput_GiveMultipleCustomDelimterWithAnyLenght_ShouldAllowThoseDelimetersToSeparteNumbers()
+		{
+			//Arrange
+			var input = "//[###][****]\n2###5****5,1,\n6,10,dfdf";
+			var expecteNumbers = new List<double>()
+			{
+				2,5,5,1,6,10,0
+			};
+
+			//Act
+			var result = InputParser.GetNumbersFromInput(input);
+
+			//Assertion
+			Assert.True(expecteNumbers.All(result.Contains));
+		}
 	}
 }

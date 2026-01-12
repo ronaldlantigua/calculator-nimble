@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CalculatorApp
@@ -9,11 +10,11 @@ namespace CalculatorApp
 		{
 			var baseDelimeter = ",";
 			var extraDelimeter = "\n";
-			var customDelimeter = GetCustomDelimeter(input);
+			var customDelimeters = GetCustomDelimeters(input);
 
 			input = input.Replace(extraDelimeter, baseDelimeter);
 
-			if(!string.IsNullOrEmpty(customDelimeter))
+			foreach (var customDelimeter in customDelimeters) 
 			{
 				input = input.Replace(customDelimeter, baseDelimeter);
 			}
@@ -41,22 +42,43 @@ namespace CalculatorApp
 			return numbers;
 		}
 
-		private static string GetCustomDelimeter(string input)
+		private static List<string> GetCustomDelimeters(string input)
 		{
 			var customSingleDelimeterPattern = "//.\n";
-			var customDelimeterPattern = "//\\[.+\\]\n";
+			var customDelimeterPattern = "//(\\[.+\\])+\n";
+
 			var singleMatch = Regex.Match(input, customSingleDelimeterPattern);
 			var match = Regex.Match(input, customDelimeterPattern);
 			if (singleMatch.Success && singleMatch.Index == 0) 
 			{
-				return singleMatch.Groups[0].Value.Replace("//", "").Replace("\n", "");
+				var delimeter = singleMatch.Groups[0].Value.Replace("//", "").Replace("\n", "");
+				return [delimeter];
 			}
-			
+
+			var result = new List<string>();
+
 			if (match.Success && match.Index == 0) 
 			{
-				return match.Groups[0].Value.Replace("//[", "").Replace("]\n", "");
+				var delimeters = match.Groups[0].Value.Replace("//", "").Replace("\n", "");
+				var temp = new StringBuilder();
+
+				foreach(var character in delimeters)
+				{
+					if (character == '[') continue;
+
+					if(character == ']')
+					{
+						result.Add(temp.ToString());
+						temp.Clear();
+						continue;
+					}
+
+					temp.Append(character.ToString());
+				}
+
 			}
-			return string.Empty;
+			
+			return result;
 		}
 	}
 }
