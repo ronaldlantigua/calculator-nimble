@@ -36,7 +36,8 @@ namespace CalculatorApp
 			});
 
 
-			if (numbers.Count() <= 1) throw new Exception("Invalid Input");
+			if (numbers.Count() <= 0) return [0,0];
+			if (numbers.Count() == 1) return [numbers.First(), 0];
 
 			
 			return numbers;
@@ -49,6 +50,7 @@ namespace CalculatorApp
 
 			var singleMatch = Regex.Match(input, customSingleDelimeterPattern);
 			var match = Regex.Match(input, customDelimeterPattern);
+
 			if (singleMatch.Success && singleMatch.Index == 0) 
 			{
 				var delimeter = singleMatch.Groups[0].Value.Replace("//", "").Replace("\n", "");

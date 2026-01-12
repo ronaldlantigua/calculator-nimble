@@ -6,21 +6,8 @@ namespace CalculatorTests
 	public class InputParserTests
 	{
 		[Theory]
-		[InlineData("")]
-		[InlineData("5")]
-		public void GetNumbersFromInput_GivenLessThanTwoNumberAsInput_ReturnException(string input) 
-		{
-			//Arrange
-			var expectedMessage = "Invalid Input";
-
-			//Act
-			//Assertion
-			var exception = Assert.Throws<Exception>(() => InputParser.GetNumbersFromInput(input));
-			Assert.Equal(expectedMessage, exception.Message);
-		}
-
-		
-		[Theory]
+		[InlineData("",0, 0)]
+		[InlineData("8",8, 0)]
 		[InlineData(",",0, 0)]
 		[InlineData("5,",5, 0)]
 		[InlineData(",5",0, 5)]
